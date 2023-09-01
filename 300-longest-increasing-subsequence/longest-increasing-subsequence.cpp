@@ -18,8 +18,8 @@ public:
             return 0;
         }
         //include
-        if(dp[curr][prev+1]!=-1){
-            return dp[curr][prev+1];
+        if(dp[prev+1][curr]!=-1){
+            return dp[prev+1][curr];
         }
         int include=0;
         if(prev == -1 || nums[curr]>nums[prev])
@@ -27,14 +27,14 @@ public:
         //exclude
         int exclude=0+solveUsingMem(nums,curr+1,prev,dp);
         int ans=max(include,exclude);
-        dp[curr][prev+1]=ans;
-        return dp[curr][prev+1];
+        dp[prev+1][curr]=ans;
+        return dp[prev+1][curr];
     }
     int lengthOfLIS(vector<int>& nums) {
         int curr=0;
         int prev=-1;
         // return solveUsingRec(nums,curr,prev);
-        vector<vector<int>>dp(nums.size(),vector<int>(nums.size()+1,-1));
+        vector<vector<int>>dp(nums.size(),vector<int>(nums.size()+2,-1));
         return solveUsingMem(nums,curr,prev,dp);
     }
 };
